@@ -46,8 +46,15 @@ async def admin_update_ticket(ticketId: str, update_data: AdminTicketUpdate):
 
     if update_data.priority is not None:
         update_fields["priority"] = update_data.priority
+    if update_data.urgency is not None:
+        # urgency stored as lowercase values
+        update_fields["urgency"] = update_data.urgency
     if update_data.status is not None:
-        update_fields["status"] = update_data.status
+        # Accept 'pending' from frontend and map to internal 'in_progress'
+        status_val = update_data.status
+        if status_val == 'pending':
+            status_val = 'in_progress'
+        update_fields["status"] = status_val
     if update_data.adminSuggestion is not None:
         update_fields["adminSuggestion"] = update_data.adminSuggestion
 

@@ -3,7 +3,8 @@ from typing import Literal, Optional
 
 UrgencyType = Literal["low", "medium", "high", "critical"]
 PriorityType = Literal["Low", "Medium", "High", "Critical"]
-StatusType = Literal["open", "in_progress", "resolved"]
+# Accept both 'in_progress' and 'pending' (frontend uses 'pending')
+StatusType = Literal["open", "in_progress", "pending", "resolved"]
 
 class TicketCreate(BaseModel):
     subject: str
@@ -32,4 +33,5 @@ class TicketListItem(BaseModel):
 class AdminTicketUpdate(BaseModel):
     priority: Optional[PriorityType] = None
     status: Optional[StatusType] = None
+    urgency: Optional[UrgencyType] = None
     adminSuggestion: Optional[str] = None

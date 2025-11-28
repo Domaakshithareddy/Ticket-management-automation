@@ -24,7 +24,7 @@ def ticket_doc_to_response(doc: dict) -> TicketResponse:
         ticketId=doc["ticketId"],
         subject=doc["subject"],
         description=doc["description"],
-        urgency=doc["urgency"],
+        urgency=doc.get("urgency", "medium"),
         category=doc["category"],
         priority=doc["priority"],
         status=doc["status"],
